@@ -68,7 +68,6 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:locale" content="hi_IN" />
         <meta name="google-site-verification" content="S1PCTdQeakM3pn5FHSb69dH8Q4FaLwkQ9xWm4XF4ZZ4" />
         <meta name="6a97888e-site-verification" content="6a7cc8128293023c8e44e366450437f9" />
-        <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
       </Head>
 
