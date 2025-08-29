@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     await res.revalidate('/')
 
 
-
+ 
 
     console.log('Re-Validating... Successfull');
     return res.json({ revalidated: true })
