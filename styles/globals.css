@@ -1,0 +1,64 @@
+/* ✅ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Pushster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaldi&display=swap');
+
+/* ✅ Tailwind Import */
+@import "tailwindcss";
+
+/* ✅ Theme Colors */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ✅ Global Styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ✅ Component Classes */
+@layer components {
+  .icon {
+    @apply h-5 md:h-6 mr-[3px] lg:mr-1 transform transition duration-200 hover:scale-125;
+  }
+
+  .dark {
+    @apply bg-black text-white border-gray-800;
+  }
+
+  .light {
+    @apply bg-gray-100 text-black border-gray-300;
+  }
+
+  .header {
+    @apply font-bold p-1 text-xl mt-10;
+  }
+
+  .para {
+    @apply pb-3;
+  }
+}
