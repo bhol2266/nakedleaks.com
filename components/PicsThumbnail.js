@@ -86,7 +86,7 @@ function PicsThumbnail({ data, imageIndex }) {
 
                         </div>
                     )}
-                </Link>
+                </Link> 
 
                 <div className='p-2'>
 
