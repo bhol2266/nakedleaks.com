@@ -113,11 +113,12 @@ const Index = () => {
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
                                 {groupedTags[letter].map((tag, index) => (
                                     <Link
+                                        key={index}
+
                                         href={`/tag/${tag.href}`}
                                         className="text-gray-800 hover:text-pink-600 font-medium"
                                     >
                                         <div
-                                            key={index}
                                             className="flex items-center justify-between hover:bg-gray-100 rounded-lg p-2 transition"
                                         >
 
