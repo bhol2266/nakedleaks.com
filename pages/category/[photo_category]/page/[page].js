@@ -18,7 +18,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, category_titl
     if (router.isFallback) {
         return (
             <div className="flex justify-center mx-auto mt-10 ">
-                <BeatLoader loading size={25} color={'orange'} />
+<BeatLoader loading size={25} color={"#DB2777"} />
             </div>
         )
     }
