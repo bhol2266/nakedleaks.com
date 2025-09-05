@@ -66,7 +66,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, topAlbumsAllT
 
 
             {topAlbumsAllTime && topAlbumsAllTime.length > 0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6">
                     {topAlbumsAllTime.slice(0, 6).map((album) => (
                         <RecentPost
                             key={album.original_fullalbum_href}
@@ -80,7 +80,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, topAlbumsAllT
             <h3 className='font-inter font-semibold mx-4 mt-[80px] mb-4 text-[16px] sm:text-[20px]'>Visitors Favourites (Monthly) </h3>
 
             {topAlbumsLast60Days && topAlbumsLast60Days.length > 0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6">
                     {topAlbumsLast60Days.slice(0, 6).map((album) => (
                         <RecentPost
                             key={album.original_fullalbum_href}

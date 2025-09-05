@@ -17,9 +17,9 @@ function RecentPost({ data, imageIndex }) {
     }
 
     return (
-        <div className="p-2 bg-[#F1F1F1]">
+        <div className="m-2">
             <PopunderAds />
-            <div className="p-2 animate-fade flex flex-col justify-center rounded-2xl shadow-lg transform transition duration-150  overflow-hidden">
+            <div className=" bg-[#F1F1F1] animate-fade flex flex-col justify-center rounded-2xl shadow-lg transform transition duration-150  overflow-hidden">
 
 
 
@@ -27,7 +27,7 @@ function RecentPost({ data, imageIndex }) {
                 <Link href={getAlbumlink(href)} className="cursor-pointer block">
                     {/* Thumbnail */}
                     {showImage && (
-                        <div className="w-full h-full rounded-t-2xl relative flex items-center justify-center my-2">
+                        <div className="w-full h-full rounded-t-2xl relative flex items-center justify-center ">
                             {/* Image */}
                             <img
                                 className="max-w-full h-[300px] bg-black object-contain rounded-t-2xl"
@@ -46,8 +46,8 @@ function RecentPost({ data, imageIndex }) {
                     <h1 className="text-[14px] lg:text-[15px] font-semibold font-inter 
                  hover:text-[#3A6FE1] 
                  line-clamp-2 
-                 h-[3em] 
-                 overflow-hidden">
+                 h-[3.7em] 
+                 overflow-hidden p-2">
                         {data.title}
                     </h1>
                 </Link>

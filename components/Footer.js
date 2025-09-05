@@ -13,48 +13,43 @@ function Footer() {
 
     return (
 
-        <div className={`font-footer    ${spinnerLoading ? "hidden" : ""} `}>
+        <div className={`font-footer    ${spinnerLoading ? "hidden" : ""} bg-black`}>
 
-            <Link href='/submitStory'>
-                <p className='w-fit mx-auto  md:text-xl   text-center p-1 pr-6 hover:scale-105  transition-all lg:hidden text-[20px] pt-3 text-semiblack underline '>अपनी कहानी भेजे</p>
-            </Link>
+
 
             <div className="flex  justify-around items-center py-4 2xl:w-3/4 3xl:w-1/2 mx-auto">
                 <div className="">
-                    <p className='font-semibold text-orange-800 text-[17px] text-left mb-2 lg:text-[20px] underline'>Information</p>
-                    <Link passHref={true} href={'/membership'}>
-                        <p className=' text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Join</p>
+                    <p className='font-semibold text-white text-[17px] text-left mb-2 lg:text-[20px] underline'>Information</p>
+
+
+                    <Link passHref={true} href={'/terms'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Terms and conditions</p>
                     </Link>
-                    <p onClick={() => { setLoginModalVisible(true) }} className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Member Sign in</p>
-
-                    <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Password Recovery</p>
-
+                    <Link passHref={true} href={'/privacy'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Privacy Policy</p>
+                    </Link>
+{/* 
                     <a rel="nofollow" href='https://theporndude.com' >
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>ThePornDude</p>
-                    </a>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>ThePornDude</p>
+                    </a> */}
 
                     <Link passHref={true} href={'/parentalcontrol'}>
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Parental Control</p>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Parental Control</p>
                     </Link>
 
                 </div>
 
                 <div className="">
-                    <p className='font-semibold text-orange-800 underline text-[17px] text-left mb-2 lg:text-[20px]'>Legal</p>
-                    <Link passHref={true} href={'/terms'}>
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Terms and conditions</p>
-                    </Link>
-                    <Link passHref={true} href={'/privacy'}>
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Privacy Policy</p>
-                    </Link>
+                    <p className='font-semibold text-white underline text-[17px] text-left mb-2 lg:text-[20px]'>Legal</p>
+
                     <Link passHref={true} href={'/cookiepolicy'}>
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>Cookies Policy</p>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Cookies Policy</p>
                     </Link>
                     <Link passHref={true} href={'/dmca'}>
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>DMCA / Content Removal</p>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>DMCA / Content Removal</p>
                     </Link>
                     <Link passHref={true} href={'/2257'}>
-                        <p className='text-semiblack text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-orange-800 transition-colors lg:text-[18px]'>2257</p>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>2257</p>
                     </Link>
                 </div>
 
@@ -66,12 +61,12 @@ function Footer() {
 
 
             <div className='w-full p-4 text-center pt-10'>
-                <p className='whitespace-normal break-words mb-2 px-4 text-sm'>
-                    Antarvasna is rated with RTA label. Parents, you can easily block access to this site.
+                <p className='whitespace-normal break-words mb-2 px-4 text-sm text-white'>
+                    NakedLeaks is rated with RTA label. Parents, you can easily block access to this site.
                     Please <a href="https://www.rtalabel.org/index.php?content=parents" className='text-blue-500 underline hover:text-blue-700'>read</a> for more information.
                 </p>
-                <p className='whitespace-normal break-words font-inter text-sm'>
-                    © {new Date().getFullYear()} Antarvasna.app is a Hindi Sex Stories Website
+                <p className='whitespace-normal break-words font-inter text-sm text-white'>
+                    © {new Date().getFullYear()} NakedLeaks.app is a Indian Nude Photos Website
                 </p>
             </div>
 
