@@ -1,11 +1,13 @@
-import Pagination from '@/components/Pagination';
-import Posts from '@/components/Posts';
-import videosContext from '@/context/videos/videosContext';
 import Head from 'next/head';
-import { useRouter } from "next/router";
 import { useContext } from 'react';
+import { useRouter } from "next/router";
+import Outstreams from '@/components/Ads/Outstream';
+import Pagination from '@/components/Pagination';
+import PicsThumbnail from '@/components/PicsThumbnail';
+import videosContext from '@/context/videos/videosContext';
 import { BeatLoader } from 'react-spinners';
 import tags_list from "../../../JsonData/photos/tags_list.json";
+import Posts from '@/components/Posts';
 
 function Index({ finalDataArray, currentPage, pagination_nav_pages, category_title, category_description, category }) {
 

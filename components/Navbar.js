@@ -238,7 +238,7 @@ function Navbar() {
 
 
 
-                    <Link href='/tag/audio-sex-story'>
+                    <Link href='/tag'>
                         <p className=' text-[15px] md:text-xl   text-center p-1 pr-6 hover:text-gray-300  text-white'>Tags</p>
                     </Link>
 

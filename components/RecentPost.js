@@ -30,11 +30,11 @@ function RecentPost({ data, imageIndex }) {
                         <div className="w-full h-full rounded-t-2xl relative flex items-center justify-center ">
                             {/* Image */}
                             <img
-                                className="max-w-full h-[300px] bg-black object-contain rounded-t-2xl"
+                                className="max-w-full h-[300px] bg-black object-contain"
                                 loading="lazy"
                                 alt={data.title}
-                                // src="/dummy_image.png"
-                                src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/thumbnail.jpg`}
+                                src="/dummy_image.png"
+                                // src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/thumbnail.jpg`}
                                 onError={() => setShowImage(false)}
                             />
 
