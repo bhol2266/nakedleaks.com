@@ -44,18 +44,29 @@ function PicsThumbnail({ data, imageIndex }) {
     }
 
     return (
-        <div className="p-2 bg-[#F1F1F1]">
+        <div className="p-2 ">
             <PopunderAds />
-            <div className="p-4 animate-fade flex flex-col justify-center rounded-2xl shadow-lg transform transition duration-150  overflow-hidden">
+            <div className=" animate-fade flex flex-col justify-center rounded-2xl shadow-lg bg-[#F1F1F1] transform transition duration-150  overflow-hidden">
 
-                <Link href={`/photo/${href}`}>
-                    <h1 className="text-[16px] lg:text-[20px]] font-semibold  font-inter line-clamp-2 hover:text-[#3A6FE1]">
-                        {data.title}
-                    </h1>
-                </Link>
+                <div className='px-3 pt-3 pb-2'>
 
-                {/* Date */}
-                <p className="text-[12px] lg:text-[13px] text-gray-600">{formatDate(data.date)}</p>
+                    <Link href={`/photo/${href}`}>
+                        <h1 className="text-[16px] lg:text-[20px]] font-semibold  font-inter line-clamp-2 hover:text-[#3A6FE1]">
+                            {data.title}
+                        </h1>
+                    </Link>
+
+                    <div className='flex items-center space-x-4'>
+
+                        {/* Date */}
+                        <p className="text-[12px] lg:text-[13px] text-gray-600">{formatDate(data.date)}</p>
+
+                        {/* Views badge (top-right) */}
+                        <div className=" bg-white font-semibold mb-1 text-black text-[12px]  px-1.5 py-0.5 rounded-md">
+                            {data.views} views
+                        </div>
+                    </div>
+                </div>
 
 
                 <Link href={getAlbumlink(href)} className="cursor-pointer block">
@@ -67,72 +78,73 @@ function PicsThumbnail({ data, imageIndex }) {
                                 className="max-w-full h-[300px] bg-black object-contain rounded-t-2xl"
                                 loading="lazy"
                                 alt={data.title}
-                                // src="/dummy_image.png"
-                                src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/thumbnail.jpg`}
+                                src="/dummy_image.png"
+                                // src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/thumbnail.jpg`}
                                 onError={() => setShowImage(false)}
                             />
 
-                            {/* Views badge (top-right) */}
-                            <div className="absolute bg-white top-2 right-4  text-black text-[12px]  px-1.5 py-0.5 rounded-md">
-                                {data.views} views
-                            </div>
+
                         </div>
                     )}
                 </Link>
 
-
-                {/* Description */}
-                <div className="text-[14px] lg:text-[15px] font-medium">
-                    <p className="line-clamp-2 min-h-[2.8em]">
-                        {data.description}
-                    </p>
-                </div>
+                <div className='p-2'>
 
 
-                {/* Content */}
-                <div className="flex flex-col space-y-1.5 mt-2">
 
-
-                    {/* Category */}
-                    <div className="flex items-center text-[13px]">
-                        <img className='h-[20px] w-[20px] mr-3' src='./icons/folder.png' alt='' />
-                        {data.category.split(",").map((cat, index) => (
-                            <span key={index}>
-                                <Link href={getCategoryLink(cat.trim())} className="hover:underline">
-                                    {cat.trim()}
-                                </Link>
-                                {index < data.category.split(",").length - 1 && ", "}
-                            </span>
-                        ))}
+                    {/* Description */}
+                    <div className="text-[14px] lg:text-[15px] font-medium">
+                        <p className="line-clamp-2 min-h-[2.8em]">
+                            {data.description}
+                        </p>
                     </div>
 
 
-                    {/* Tags (comma separated, clickable, underlined) */}
-                    {data.tags && data.tags.length > 0 && (
-                        <div className="flex items-start text-[13px] text-[#3A6FE1] ">
-                            <img className="h-[20px] w-[20px] mr-3" src="./icons/tag.png" alt="" />
-                            <div className="flex overflow-hidden whitespace-nowrap text-ellipsis">
-                                {data.tags.map((tag, i) => (
-                                    <span key={i} className="mr-2">
-                                        <Link
-                                            href={getTagLink(tag.trim())}
-                                            className="hover:underline underline"
-                                        >
-                                            {tag}
-                                        </Link>
-                                        {i < data.tags.length - 1 && ","}
-                                    </span>
-                                ))}
-                            </div>
+                    {/* Content */}
+                    <div className="flex flex-col space-y-1.5 mt-2">
+
+
+                        {/* Category */}
+                        <div className="flex items-center text-[13px]">
+                            <img className='h-[20px] w-[20px] mr-3' src='./icons/folder.png' alt='' />
+                            {data.category.split(",").map((cat, index) => (
+                                <span key={index}>
+                                    <Link href={getCategoryLink(cat.trim())} className="hover:underline">
+                                        {cat.trim()}
+                                    </Link>
+                                    {index < data.category.split(",").length - 1 && ", "}
+                                </span>
+                            ))}
                         </div>
-                    )}
 
 
-                    <div className="flex items-center text-[13px]">
-                        <img className='h-[20px] w-[20px] mr-3' src='./icons/chat.png' alt='' />
-                        <span className='text-[13px]'>Leave a comment</span>
+                        {/* Tags (comma separated, clickable, underlined) */}
+                        {data.tags && data.tags.length > 0 && (
+                            <div className="flex items-start text-[13px] text-[#3A6FE1] ">
+                                <img className="h-[20px] w-[20px] mr-3" src="./icons/tag.png" alt="" />
+                                <div className="flex overflow-hidden whitespace-nowrap text-ellipsis">
+                                    {data.tags.map((tag, i) => (
+                                        <span key={i} className="mr-2">
+                                            <Link
+                                                href={getTagLink(tag.trim())}
+                                                className="hover:underline underline"
+                                            >
+                                                {tag}
+                                            </Link>
+                                            {i < data.tags.length - 1 && ","}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+
+                        <div className="flex items-center text-[13px]">
+                            <img className='h-[20px] w-[20px] mr-3' src='./icons/chat.png' alt='' />
+                            <span className='text-[13px]'>Leave a comment</span>
+                        </div>
+
                     </div>
-
 
 
                 </div>

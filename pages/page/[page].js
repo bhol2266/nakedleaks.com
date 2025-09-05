@@ -1,11 +1,10 @@
+import Posts from '@/components/Posts';
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import { useContext } from 'react';
 import { BeatLoader } from 'react-spinners';
 import Pagination from '../../components/Pagination';
-import PicsThumbnail from "../../components/PicsThumbnail";
 import videosContext from '../../context/videos/videosContext';
-import Outstreams from '../../components/Ads/Outstream';
 
 
 function Pics({ finalDataArray, currentPage, pagination_nav_pages }) {
@@ -23,14 +22,6 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages }) {
         )
     }
 
-   const displaypics = finalDataArray.map((obj) => {
-
-
-        return (
-            <PicsThumbnail key={obj.title} data={obj}  />
-
-        )
-    })
 
     return (
         <div className=" ">
@@ -58,10 +49,8 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages }) {
             </Head>
 
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-2 lg:gap-3  md:grid-cols-4 lg:grid-cols-4">
+                        <Posts posts={finalDataArray} />
 
-                {displaypics}
-            </div>
 
             {/* PAGINATION */}
             <Pagination data={{ url: `/`, currentPage:  pagination_nav_pages[0], lastPage: pagination_nav_pages[1] }} />

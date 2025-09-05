@@ -1,10 +1,10 @@
+import Pagination from '@/components/Pagination';
+import Posts from '@/components/Posts';
+import videosContext from '@/context/videos/videosContext';
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import { useContext } from 'react';
 import { BeatLoader } from 'react-spinners';
-import Pagination from '@/components/Pagination';
-import PicsThumbnail from "@/components/PicsThumbnail";
-import videosContext from '@/context/videos/videosContext';
 import tags_list from "../../../../JsonData/photos/tags_list.json";
 
 
@@ -23,14 +23,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, category_titl
         )
     }
 
-    const displaypics = finalDataArray.map((picData, index) => {
 
-
-        return (
-            <PicsThumbnail key={picData.title} data={picData} />
-
-        )
-    })
 
     return (
         <div className=" ">
@@ -59,10 +52,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, category_titl
             <p className='text-lg m-2 mx-4 md:text-xl font-light text-sb font-hindi'>{category_description}</p>
             <p className='text-lg text-right font-medium m-2 mx-4 md:text-xl'>PAGE : {currentPage}</p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-2 lg:gap-3  md:grid-cols-4 lg:grid-cols-4 ">
-
-                {displaypics}
-            </div>
+            <Posts posts={finalDataArray} />
 
             {/* PAGINATION */}
             <Pagination data={{ url: `/tag/${tag}`, currentPage: pagination_nav_pages[0], lastPage: pagination_nav_pages[1] }} />

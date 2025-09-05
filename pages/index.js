@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useContext } from 'react';
 import Outstreams from "../components/Ads/Outstream";
 import Pagination from '../components/Pagination';
-import PicsThumbnail from "../components/PicsThumbnail";
 import videosContext from '../context/videos/videosContext';
 import RecentPost from '@/components/RecentPost';
+import Posts from '@/components/Posts';
 function Pics({ finalDataArray, currentPage, pagination_nav_pages, topAlbumsAllTime, topAlbumsLast60Days }) {
 
 
@@ -13,12 +13,6 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, topAlbumsAllT
     const { setdisclaimerShow, } = context;
     const router = useRouter();
 
-
-    const displaypics = finalDataArray.map((obj) => {
-        return (
-            <PicsThumbnail key={obj.title} data={obj} />
-        )
-    })
 
     const getLast6Months = () => {
         const months = [];
@@ -33,7 +27,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, topAlbumsAllT
     };
 
     const archiveMonths = getLast6Months();
-  
+
     return (
         <div className=" ">
 
@@ -61,10 +55,9 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages, topAlbumsAllT
 
 
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-2 lg:gap-3  md:grid-cols-4 lg:grid-cols-4">
 
-                {displaypics}
-            </div>
+            <Posts posts={finalDataArray} />
+
 
             {/* PAGINATION */}
             <Pagination data={{ url: `/`, currentPage: pagination_nav_pages[0], lastPage: pagination_nav_pages[1] }} />

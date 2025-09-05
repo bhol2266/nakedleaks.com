@@ -1,19 +1,19 @@
+import Pagination from '@/components/Pagination';
+import Posts from '@/components/Posts';
+import videosContext from '@/context/videos/videosContext';
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import { useContext } from 'react';
 import { BeatLoader } from 'react-spinners';
-import Pagination from '@/components/Pagination';
-import PicsThumbnail from "@/components/PicsThumbnail";
-import videosContext from '@/context/videos/videosContext';
 import categories from "../../../../JsonData/photos/categories_list.json";
 
 
-function Pics({  finalDataArray, currentPage, pagination_nav_pages, category_title, category_description,category}) {
+function Pics({ finalDataArray, currentPage, pagination_nav_pages, category_title, category_description, category }) {
 
 
     const context = useContext(videosContext);
     const router = useRouter();
-    var { page,photo_category } = router.query
+    var { page, photo_category } = router.query
 
     if (router.isFallback) {
         return (
@@ -23,21 +23,14 @@ function Pics({  finalDataArray, currentPage, pagination_nav_pages, category_tit
         )
     }
 
-    const displaypics = finalDataArray.map((picData, index) => {
 
-
-        return (
-            <PicsThumbnail key={picData.title} data={picData} />
-
-        )
-    })
 
     return (
         <div className=" ">
 
             <Head>
-            <title>{category_title} | Indian Nude Photos Page - {currentPage}</title>
-            <meta name="description" content={category_description} />  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+                <title>{category_title} | Indian Nude Photos Page - {currentPage}</title>
+                <meta name="description" content={category_description} />  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
 
                 <meta property="og:title" content="Indian Nude Photos | Desi Scandals" />
@@ -59,10 +52,7 @@ function Pics({  finalDataArray, currentPage, pagination_nav_pages, category_tit
             <p className='text-lg m-2 mx-4 md:text-xl font-light text-sb font-hindi'>{category_description}</p>
             <p className='text-lg text-right font-medium m-2 mx-4 md:text-xl'>PAGE : {currentPage}</p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-2 lg:gap-3  md:grid-cols-4 lg:grid-cols-4 ">
-
-                {displaypics}
-            </div>
+            <Posts posts={finalDataArray} />
 
             {/* PAGINATION */}
             <Pagination data={{ url: `/category/${photo_category}`, currentPage: pagination_nav_pages[0], lastPage: pagination_nav_pages[1] }} />
@@ -91,23 +81,23 @@ export async function getStaticProps(context) {
     const { photo_category, page } = context.params;
 
     // Find the category object
-      const categoryObj = categories.find(cat => cat.href === photo_category);
-  
-  
-      const res = await fetch(`${process.env.BACKEND_URL}getPhotoAlbumsCategoriesPaginated_API?category=${categoryObj.category_title}&page=${page}`);
-  
-      const data = await res.json();
-  
-  
-      return {
-          props: {
-              finalDataArray: data.docs,
-              pagination_nav_pages: data.paginationNavPages,
-              currentPage: page,
-              category: categoryObj.category_title,
-              category_title: categoryObj.category_title,        // from JSON file
-              category_description: categoryObj.content,
-              
-          }
-      }
+    const categoryObj = categories.find(cat => cat.href === photo_category);
+
+
+    const res = await fetch(`${process.env.BACKEND_URL}getPhotoAlbumsCategoriesPaginated_API?category=${categoryObj.category_title}&page=${page}`);
+
+    const data = await res.json();
+
+
+    return {
+        props: {
+            finalDataArray: data.docs,
+            pagination_nav_pages: data.paginationNavPages,
+            currentPage: page,
+            category: categoryObj.category_title,
+            category_title: categoryObj.category_title,        // from JSON file
+            category_description: categoryObj.content,
+
+        }
+    }
 }
