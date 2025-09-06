@@ -1,80 +1,74 @@
 import Link from 'next/link';
-
 import { useContext } from 'react';
 import videosContext from '../context/videos/videosContext';
 
-
 function Footer() {
+  const context = useContext(videosContext);
+  const { spinnerLoading } = context;
+  const year = new Date().getFullYear();
 
-    //Use Context
-    const context = useContext(videosContext);
-    const { spinnerLoading } = context;
-    const year = new Date().getFullYear();
-
-    return (
-
-        <div className={`font-footer    ${spinnerLoading ? "hidden" : ""} bg-black`}>
-
-
-
-            <div className="flex  justify-around items-center py-4 2xl:w-3/4 3xl:w-1/2 mx-auto">
-                <div className="">
-                    <p className='font-semibold text-white text-[17px] text-left mb-2 lg:text-[20px] underline'>Information</p>
+ const links = [
+  { href: '/about-us', label: 'About Us' },
+  { href: '/contact-us', label: 'Contact Us' },
+  { href: '/report-content', label: 'Report Content' },
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/18-u-s-c-2257', label: '2257 Statement' },
+];
 
 
-                    <Link passHref={true} href={'/terms'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Terms and conditions</p>
-                    </Link>
-                    <Link passHref={true} href={'/privacy'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Privacy Policy</p>
-                    </Link>
-{/* 
-                    <a rel="nofollow" href='https://theporndude.com' >
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>ThePornDude</p>
-                    </a> */}
-
-                    <Link passHref={true} href={'/parentalcontrol'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Parental Control</p>
-                    </Link>
-
-                </div>
-
-                <div className="">
-                    <p className='font-semibold text-white underline text-[17px] text-left mb-2 lg:text-[20px]'>Legal</p>
-
-                    <Link passHref={true} href={'/cookiepolicy'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>Cookies Policy</p>
-                    </Link>
-                    <Link passHref={true} href={'/dmca'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>DMCA / Content Removal</p>
-                    </Link>
-                    <Link passHref={true} href={'/2257'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-white transition-colors lg:text-[18px]'>2257</p>
-                    </Link>
-                </div>
-
-
-            </div>
-
-
-
-
-
-            <div className='w-full p-4 text-center pt-10'>
-                <p className='whitespace-normal break-words mb-2 px-4 text-sm text-white'>
-                    NakedLeaks is rated with RTA label. Parents, you can easily block access to this site.
-                    Please <a href="https://www.rtalabel.org/index.php?content=parents" className='text-blue-500 underline hover:text-blue-700'>read</a> for more information.
-                </p>
-                <p className='whitespace-normal break-words font-inter text-sm text-white'>
-                    © {new Date().getFullYear()} NakedLeaks.app is a Indian Nude Photos Website
-                </p>
-            </div>
-
-
+  return (
+    <footer className={`font-footer ${spinnerLoading ? "hidden" : ""} bg-black text-white`}>
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+        
+        {/* Quick Links */}
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold border-b border-pink-500 inline-block pb-1 mb-2">Quick Links</h3>
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} passHref>
+              <p className="cursor-pointer hover:text-pink-400 transition-colors">{link.label}</p>
+            </Link>
+          ))}
         </div>
 
-    )
+     {/* About / Description */}
+<div className="space-y-2 text-gray-300 text-sm">
+  <h3 className="text-lg font-semibold border-b border-pink-500 inline-block pb-1 mb-2">About Nakedleaks.com</h3>
+  <p className="whitespace-normal break-words">
+    © {year} Nakedleaks.com is a free platform to view high-quality Indian porn photos. Explore nudes of amateurs and pornstars, including desi fantasies with bhabhi and aunties.
+  </p>
+  <p className="whitespace-normal break-words mt-2">
+    Content is sourced from the internet and viewer submissions. Share your fantasies, and we may add them to our collection.
+  </p>
+</div>
 
+
+        {/* Legal / Disclaimer */}
+        <div className="text-gray-400 text-sm flex flex-col justify-start space-y-2">
+          <h3 className="text-lg font-semibold border-b border-pink-500 inline-block pb-1 mb-2">Legal & Info</h3>
+          <p>
+            NakedLeaks is rated with RTA label. Parents, you can easily block access to this site. Please{" "}
+            <a
+              href="https://www.rtalabel.org/index.php?content=parents"
+              className="text-pink-400 underline hover:text-pink-600"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              read
+            </a>{" "}
+            for more information.
+          </p>
+          <p className="mt-4">
+            Made with ❤️ by Nakedleaks.com Team
+          </p>
+        </div>
+      </div>
+
+      {/* Bottom Divider */}
+      <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-xs px-4">
+        © {year} Nakedleaks.com - Free Indian porn photos platform. All rights reserved.
+      </div>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;

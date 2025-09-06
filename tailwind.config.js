@@ -45,19 +45,17 @@ module.exports = {
         'sb': '#454545'
       },
       fontFamily: {
-        body: ['Pushster'],
-        manrope: ['Manrope'],
-        delius: ['Delius Unicase'],
-        inter: ['Inter'],
-        poppins: ['Poppins'],
-        DMsans: ['DM Sans'],
-        Opensans: ['Open Sans'],
-        SFuiDisplay: ['SF UI Display'],
-        Abhayalibre: ['Abhaya Libre'],
-        kalam: ['Kalam'],
-        hindi: ['Jaldi'],
-
-      }
+        body: ['Pushster', 'cursive'],
+        manrope: ['Manrope', 'sans-serif'],
+        delius: ['Delius Unicase', 'cursive'],
+        inter: ['Inter', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        DMsans: ['DM Sans', 'sans-serif'],
+        Opensans: ['Open Sans', 'sans-serif'],
+        Abhayalibre: ['Abhaya Libre', 'serif'],
+        kalam: ['Kalam', 'cursive'],
+        hindi: ['Jaldi', 'sans-serif'],
+      },
     },
   },
 

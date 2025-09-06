@@ -37,7 +37,9 @@ function SinglePicThumnail({ picURL, index }) {
     return (
         <div onClick={() => { setshowCarausel(true); setCarouselIndex(index) }} key={index} className="relative overflow-hidden">
             <img
-                src={imageSrc}
+                // src={imageSrc}
+                src="/dummy_image.png"
+
                 alt={picURL}
                 onError={handleImageError} // Call this function if the image fails to load
 

@@ -1,21 +1,20 @@
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
+import Script from 'next/script';
 import NProgress from 'nprogress';
+import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import BannerAds from '../components/Ads/BannerAds';
+import Outstreams from '../components/Ads/Outstream';
 import Footer from '../components/Footer';
 import { ModalFeedbackForm } from '../components/ModalFeedbackForm';
 import Navbar from '../components/Navbar';
 import VideoState from '../context/videos/VideoState';
+import { bannedKeywords } from '../JsonData/BannedKeywords';
+import { BannedUrls } from '../JsonData/BannedUrls'; // List of banned URLs
 import '../styles/globals.css';
 import '../styles/nProgress.css';
-import { useEffect } from 'react';
-import { subscribeToTopic } from '../firebase';
-import Outstreams from '../components/Ads/Outstream';
-import BannerAds from '../components/Ads/BannerAds';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Script from 'next/script';
-import { BannedUrls } from '../JsonData/BannedUrls'; // List of banned URLs
-import { bannedKeywords } from '../JsonData/BannedKeywords';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -84,7 +83,7 @@ function MyApp({ Component, pageProps }) {
         </Script>
 
         <Navbar />
-        <div className="">
+        <div className="bg-white">
           <div className="4xl:w-[85%] 3xl:w-[95%] flex mx-auto justify-center pt-1 md:pt-3 px-1">
             <Component {...pageProps} />
           </div>
