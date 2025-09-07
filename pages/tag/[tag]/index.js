@@ -9,7 +9,7 @@ import { BeatLoader } from 'react-spinners';
 import tags_list from "../../../JsonData/photos/tags_list.json";
 import Posts from '@/components/Posts';
 
-function Index({ finalDataArray, currentPage, pagination_nav_pages, category_title, category_description, category }) {
+function Index({ finalDataArray, currentPage, pagination_nav_pages, tag_title, category_description, category }) {
 
     const context = useContext(videosContext);
 
@@ -20,7 +20,7 @@ function Index({ finalDataArray, currentPage, pagination_nav_pages, category_tit
     if (router.isFallback) {
         return (
             <div className="flex justify-center mx-auto mt-10 ">
-<BeatLoader loading size={25} color={"#DB2777"} />
+                <BeatLoader loading size={25} color={"#DB2777"} />
             </div>
         )
     }
@@ -31,21 +31,50 @@ function Index({ finalDataArray, currentPage, pagination_nav_pages, category_tit
     return (
         <div className=''>
             <Head>
-                <title>{tag} | Indian Nude Photos</title>
+                <title>{tag_title} | Indian Nude Photos - Page {currentPage}</title>
                 <meta name="description" content={category_description} />
-                <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-                <meta property="og:title" content="Indian Nude Photos | Desi Scandals" />
-                <meta property="og:description" content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-                <meta property="og:url" content="https://www.Antarvasna.app/photo" />
-                <meta property="og:site_name" content="Free Hindi Sex Stories" />
+                <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content={`${tag_title} | Indian Nude Photos - Page ${currentPage}`} />
+                <meta property="og:description" content={category_description} />
+                <meta property="og:url" content={`https://www.nakedleaks.com/tag/${tag}`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/og-default.jpg" />
+                <meta property="og:image:alt" content={`${tag_title} gallery preview`} />
+
+                {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Indian Nude Photos | Desi Scandals" />
-                <meta name="twitter:description" content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-                <meta name="twitter:label1" content="पोस्ट" />
-                <meta name="twitter:data1" content="85" />
+                <meta name="twitter:title" content={`${tag_title} | Indian Nude Photos - Page ${currentPage}`} />
+                <meta name="twitter:description" content={category_description} />
+                <meta name="twitter:image" content="/images/twitter-card.jpg" />
+                <meta name="twitter:image:alt" content={`${tag_title} gallery preview`} />
+
+                {/* JSON-LD Structured Data */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ImageGallery",
+                            "name": `${tag_title} - Page ${currentPage}`,
+                            "description": category_description,
+                            "url": `https://www.nakedleaks.com/tag/${tag}`,
+                            "thumbnailUrl": "/images/og-default.jpg",
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "Desi Scandals",
+                                "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "/images/logo.png"
+                                }
+                            }
+                        })
+                    }}
+                />
             </Head>
 
-            <h1 className='text-xl font-semibold m-2 mx-4 md:text-2xl font-inter'>{category_title}</h1>
+            <h1 className='text-xl font-semibold m-2 mx-4 md:text-2xl font-inter'>{tag_title}</h1>
             <p className='text-lg m-2 mx-4 md:text-xl font-light text-sb font-hindi'>{category_description}</p>
             <p className='text-lg text-right font-medium m-2 mx-4 md:text-xl'>PAGE : {currentPage}</p>
             <Posts posts={finalDataArray} />
@@ -93,7 +122,7 @@ export async function getStaticProps(context) {
             pagination_nav_pages: data.paginationNavPages,
             currentPage: 1,
             category: tagObj.title,
-            category_title: tagObj.title,        // from JSON file
+            tag_title: tagObj.title,        // from JSON file
             category_description: tagObj.content,
         }
     }

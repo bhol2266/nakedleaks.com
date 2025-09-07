@@ -17,7 +17,7 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages }) {
     if (router.isFallback) {
         return (
             <div className="flex justify-center mx-auto mt-10 ">
-<BeatLoader loading size={25} color={"#DB2777"} />
+                <BeatLoader loading size={25} color={"#DB2777"} />
             </div>
         )
     }
@@ -27,33 +27,58 @@ function Pics({ finalDataArray, currentPage, pagination_nav_pages }) {
         <div className=" ">
 
             <Head>
-                <title>Indian Nude Photos | Desi Scandals</title>
-                <meta name="description"
-                    content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-                <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+                <title>Indian Nude Photos - Page {page} | Desi Scandals</title>
+                <meta
+                    name="description"
+                    content={`Explore Indian nude photos and sex galleries. Page ${page} features hot Indian girls' photos across categories like selfies, couples, and adult content.`}
+                />
+                <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
+                {/* Open Graph / Facebook */}
+                <meta property="og:title" content={`Indian Nude Photos - Page ${page} | Desi Scandals`} />
+                <meta property="og:description" content={`Browse page ${page} of Indian nude and sex photo galleries. See hot desi girls' selfies, couples, and adult photos.`} />
+                <meta property="og:url" content={`https://www.nakedleaks.com/page/${page}`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/og-default.jpg" />
+                <meta property="og:image:alt" content="Indian nude and sex photo gallery preview" />
 
-                <meta property="og:title" content="Indian Nude Photos | Desi Scandals" />
-                <meta property="og:description"
-                    content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-                <meta property="og:url" content={`https://www.Antarvasna.app/photo/${page}`} />
-                <meta property="og:site_name" content="Free Hindi Sex Stories" />
-
-
+                {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Indian Nude Photos | Desi Scandals" />
-                <meta name="twitter:description"
-                    content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-                <meta name="twitter:label1" content="पोस्ट" />
-                <meta name="twitter:data1" content="85" />
+                <meta name="twitter:title" content={`Indian Nude Photos - Page ${page} | Desi Scandals`} />
+                <meta name="twitter:description" content={`Explore Indian nude photos on page ${page}. Hot selfies, couples, and adult galleries.`} />
+                <meta name="twitter:image" content="/images/twitter-card.jpg" />
+                <meta name="twitter:image:alt" content="Indian nude and sex photo gallery preview" />
+
+                {/* Structured Data: JSON-LD for ImageGallery */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ImageGallery",
+                            "name": `Indian Nude Photos - Page ${page} | Desi Scandals`,
+                            "description": `Page ${page} of Indian nude and sex photo galleries. Browse hot desi girls' selfies, couples, and adult photos.`,
+                            "url": `https://www.nakedleaks.com/photo/${page}`,
+                            "thumbnailUrl": "/images/og-default.jpg",
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "Desi Scandals",
+                                "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "/images/logo.png"
+                                }
+                            }
+                        })
+                    }}
+                />
             </Head>
 
 
-                        <Posts posts={finalDataArray} />
+            <Posts posts={finalDataArray} />
 
 
             {/* PAGINATION */}
-            <Pagination data={{ url: `/`, currentPage:  pagination_nav_pages[0], lastPage: pagination_nav_pages[1] }} />
+            <Pagination data={{ url: `/`, currentPage: pagination_nav_pages[0], lastPage: pagination_nav_pages[1] }} />
 
 
 
@@ -76,12 +101,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 
-     const { page } = context.params;
+    const { page } = context.params;
 
-     const res = await fetch(`${process.env.BACKEND_URL}getPhotoAlbumsPaginated_API?page=${page}`  );
-     const data = await res.json();
+    const res = await fetch(`${process.env.BACKEND_URL}getPhotoAlbumsPaginated_API?page=${page}`);
+    const data = await res.json();
 
-    
+
 
     return {
         props: {

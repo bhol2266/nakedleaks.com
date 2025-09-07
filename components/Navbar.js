@@ -1,83 +1,45 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, Fragment } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import ReactCountryFlag from "react-country-flag";
-import videosContext from '../context/videos/videosContext';
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon, XIcon } from "@heroicons/react/outline";
+import { SearchIcon } from "lucide-react";
+import videosContext from "../context/videos/videosContext";
 import categories from "../JsonData/photos/categories_list.json";
 
-import { Fragment } from 'react';
-
-import {
-    ChevronDownIcon,
-    MenuIcon
-} from '@heroicons/react/outline';
-import { } from '@heroicons/react/solid';
-import { useRouter } from 'next/router';
-
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { XIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
-import { SearchIcon } from 'lucide-react';
-
-var navigation = [
-    { name: 'Home', href: '/', current: true },
-    // { name: 'Desi Girls - Video Chat', href: 'https://play.google.com/store/apps/details?id=com.bhola.livevideochat&hl=en-IN', current: false },
-    { name: 'Mobile App', href: "https://play.google.com/store/apps/details?id=com.bhola.desiKahaniya&hl=en", current: false },
-    { name: 'Sex Videos', href: "https://www.xhamster.gg/", current: false },  // route "/videos"
-    { name: 'अपनी कहानी भेजे', href: "/submitStory", current: false },
-
-
-
-]
-
-
-
-
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-
 function Navbar() {
-
-
     const { MobileAppModalVisible, setMobileAppModalVisible } = useContext(videosContext);
-    const [searchKey, setsearchKey] = useState('')
+    const { currentLocation, countryBlocked } = useContext(videosContext);
     const [showSuggested, setshowSuggested] = useState(false)
 
 
+    const [searchKey, setSearchKey] = useState("");
+    const [location, setLocation] = useState(currentLocation);
     const router = useRouter();
-    const context = useContext(videosContext);
-    const { currentLocation, countryBlocked } = context;
-
-    const [location, setlocation] = useState(currentLocation)
-
 
     useEffect(() => {
         if (localStorage.getItem("location") && !currentLocation) {
-            setlocation(JSON.parse(localStorage.getItem("location")))
+            setLocation(JSON.parse(localStorage.getItem("location")));
         }
-
-    }, [])
+    }, [currentLocation]);
 
     const goSearch = (e) => {
         e.preventDefault();
-
-
-    }
+        // 🔍 Add search functionality here
+    };
 
     const getSuggestedTags = (e) => {
-
-
-
-    }
-
-
+        setSearchKey(e.target.value);
+        // 🔍 Add suggested tags logic here
+    };
 
     return (
-
         <div>
 
-            <div className="  p-2  shadow-md lg:hidden">
+
+
+            <div className="  p-2  shadow-md xl:hidden">
 
                 <Disclosure as="nav" >
                     {({ open }) => (
@@ -115,7 +77,7 @@ function Navbar() {
 
 
 
-                                    <Disclosure.Button className="lg:hidden items-center justify-center ring-0   rounded-md text-black hover:text-white hover:bg-gray-800 p-2">
+                                    <Disclosure.Button className="xl:hidden items-center justify-center ring-0   rounded-md text-black hover:text-white hover:bg-gray-800 p-2">
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
                                             <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -138,17 +100,17 @@ function Navbar() {
                                 leaveTo="transform opacity-0 scale-95"
                             >
                                 <Disclosure.Panel className="sm:flex">
-                                    <div className={`flex flex-col relative p-1   transition ease-in-out delay-150 mt-2 `}>
+                                    <div className={`flex flex-col relative p-1 w-full  transition ease-in-out delay-150 mt-2 `}>
 
 
-                                        <form className="flex w-full items-center" onSubmit={goSearch}>
+                                        <form className="flex w-full items-center " onSubmit={goSearch}>
                                             <div className="flex-grow mr-4">
                                                 <input
                                                     value={searchKey}
                                                     onChange={getSuggestedTags}
                                                     className="w-full h-[35px] px-4 text-sm text-black border-[0.8px] border-[#E5E5E5] rounded-[15px] bg-transparent outline-none"
                                                     type="text"
-                                                    placeholder="Search your favourite videos"
+                                                    placeholder="Search your favourite album"
                                                 />
                                             </div>
                                             <div className="w-[18%]">
@@ -195,7 +157,7 @@ function Navbar() {
             </div>
 
 
-            <div className='flex flex-col font-inter font-medium  items-center text-gray-700  bg-black shadow-lg lg:hidden  '>
+            <div className='flex flex-col font-inter font-medium  items-center text-gray-700  bg-black shadow-lg xl:hidden  '>
 
                 <div className='flex items-center justify-evenly  pl-2 w-full '>
                     <Link href='/'>
@@ -255,90 +217,120 @@ function Navbar() {
 
 
 
-            {/* Large Sreeen NavBar  */}
 
-
-
-            <div className='flex-col hidden lg:flex' >
-
-
-                {/* Navbar */}
-                <div className='flex items-center justify-between   py-1 pt-2 '>
-
-                    <div className='flex items-center space-x-1 md:space-x-3 ' >
-
-                        <Link href='/'>
-                            <img src='/logo2.png' className=' h-8  ml-3 xl:ml-4 ' />
+            {/* Large Screen NavBar */}
+            <div className="flex-col hidden xl:flex bg-black px-8">
+                <div className="flex items-center justify-between pt-4 pb-4">
+                    {/* Left Side: Logo + Flag + Search */}
+                    <div className="flex items-center space-x-3 w-full">
+                        <Link href="/">
+                            <img src="/logo2.png" alt="Logo" className="h-8 ml-4" />
                         </Link>
 
-                        {location &&
-                            <div className=''>
-                                <ReactCountryFlag
-                                    svg
-                                    countryCode={location.countryCode}
-                                    style={{
-                                        fontSize: '25px',
-                                        lineHeight: '25px',
-                                    }}
-                                    aria-label="United States"
+                        {location && (
+                            <ReactCountryFlag
+                                svg
+                                countryCode={location.countryCode}
+                                style={{ fontSize: "25px", lineHeight: "25px" }}
+                            />
+                        )}
+
+                        <form onSubmit={goSearch}>
+                            <div className="flex items-center border border-gray-500 rounded-lg px-2">
+                                <SearchIcon className="text-gray-400 h-6" />
+                                <input
+                                    value={searchKey}
+                                    onChange={getSuggestedTags}
+                                    className="w-[300px] h-[35px] bg-transparent outline-none pl-2 text-white placeholder-gray-400"
+                                    type="text"
+                                    placeholder="Search"
                                 />
                             </div>
-                        }
+                        </form>
+                    </div>
 
-                        <a target="_blank" href="https://play.google.com/store/apps/details?id=com.bhola.livevideochat&hl=en-IN" rel="noopener noreferrer">
-                            <div className='hidden  flex  items-center 
-                             cursor-pointer hover:scale-105   '>
-                                <img
-                                    src='/livesex.png'
-                                    height={40}
-                                    width={40}
-                                    alt='loading'
-                                ></img>
-                                <p className='font-bold '>Desi Girls - Video Chat</p>
-                            </div>
+                    {/* Right Side: Navigation */}
+                    <div className="flex items-center justify-end space-x-[40px] w-full ">
+                        <Link href="/">
+                            <p
+                                className={`${router.pathname === "/"
+                                    ? "text-white text-[21px] border-b-2 border-white"
+                                    : "text-white text-[19px] hover:text-gray-300"
+                                    }`}
+                            >
+                                Home
+                            </p>
+                        </Link>
+
+                        {/* Categories Dropdown */}
+                        <Menu as="div" className="relative text-left">
+                            <Menu.Button
+                                className={`flex items-center font-medium ${router.pathname.startsWith("/category")
+                                    ? "text-white text-[21px] border-b-2 border-white"
+                                    : "text-white text-[19px] hover:text-gray-300"
+                                    }`}
+                            >
+                                Categories
+                                <ChevronDownIcon className="h-5 ml-1" />
+                            </Menu.Button>
+
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className="absolute z-50 bg-white top-[50px] w-[200px] max-h-[700px] rounded-md shadow-lg overflow-y-auto">
+                                    {categories.map((item) => (
+                                        <Menu.Item key={item.category_title}>
+                                            {({ active }) => (
+                                                <p
+                                                    onClick={() => router.push(`/category/${item.href}`)}
+                                                    className="block px-4 py-2 text-[16px] hover:bg-gray-200 hover:text-black cursor-pointer"
+                                                >
+                                                    {item.category_title}
+                                                </p>
+                                            )}
+                                        </Menu.Item>
+                                    ))}
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
+
+                        <Link href="/tag">
+                            <p
+                                className={`${router.pathname === "/tag"
+                                    ? "text-white text-[21px] border-b-2 border-white"
+                                    : "text-white text-[19px] hover:text-gray-300"
+                                    }`}
+                            >
+                                Tags
+                            </p>
+                        </Link>
+
+                        <a
+                            href="https://play.google.com/store/apps/details?id=com.bhola.desiKahaniya&hl=en"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <p
+                                className={`${router.asPath.includes("bhola.desiKahaniya")
+                                    ? "text-white text-[21px] border-b-2 border-white"
+                                    : "text-white text-[19px] hover:text-gray-300"
+                                    } cursor-pointer`}
+                            >
+                                Nude girl pics
+                            </p>
                         </a>
                     </div>
 
-                    {/* 
-                    <div className='flex space-x-4 items-center  '>
-
-
-                        <div >
-                            <button className='p-1 pl-2 pr-2 border-2 border-black  rounded-l'>
-                                <SunIcon onClick={enableLightMode} className='h-8 w-8 text-white' />
-                            </button>
-                            <button className='p-1 pl-2 pr-2 border-2 border-black  rounded-r'>                                            <MoonIcon onClick={enableDarkMode} className='h-8 w-8' />
-                            </button>
-                        </div>
-
-                    </div> */}
-
                 </div>
-
-
-
-
-
-
-                <div className='w-full  items-center justify-around   flex  shadow-lg'>
-                    {navigation.map(item => {
-
-                        return (
-                            <Link href={item.href} key={item.name}>
-
-                                <p key={item.name} className='text-lg text-gray-700 font-semibold cursor-pointer p-[1px]  hover:text-orange-800'>{item.name}</p>
-                            </Link>
-                        )
-                    })}
-
-
-                </div>
-
             </div>
-
-
         </div>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;
