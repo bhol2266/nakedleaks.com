@@ -112,7 +112,7 @@ function Album({ data, relatedAlbums }) {
 
 
         <div >
-          <h2 className="mt-6 text-xl sm:text-2xl font-semibold text-center bg-black text-white py-3 rounded-lg shadow-lg mb-4">
+          <h2 className="mt-6 text-xl sm:text-2xl font-semibold text-center bg-black text-white py-2 rounded-lg shadow-lg mb-2">
             Related Photos
           </h2>
           <Posts posts={relatedAlbums} />

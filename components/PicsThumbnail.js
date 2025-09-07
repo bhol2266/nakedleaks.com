@@ -106,7 +106,7 @@ function PicsThumbnail({ data, imageIndex }) {
 
                         {/* Category */}
                         <div className="flex items-center text-[13px]">
-                            <img className='h-[20px] w-[20px] mr-3' src='./icons/folder.png' alt='' />
+                            <img className='h-[20px] w-[20px] mr-3' src='/icons/folder.png' alt='' />
                             {data.category.split(",").map((cat, index) => (
                                 <span key={index}>
                                     <Link href={getCategoryLink(cat.trim())} className="hover:underline">
@@ -121,7 +121,7 @@ function PicsThumbnail({ data, imageIndex }) {
                         {/* Tags (comma separated, clickable, underlined) */}
                         {data.tags && data.tags.length > 0 && (
                             <div className="flex items-start text-[13px] text-[#3A6FE1] ">
-                                <img className="h-[20px] w-[20px] mr-3" src="./icons/tag.png" alt="" />
+                                <img className="h-[20px] w-[20px] mr-3" src="/icons/tag.png" alt="" />
                                 <div className="flex overflow-hidden whitespace-nowrap text-ellipsis">
                                     {data.tags.map((tag, i) => (
                                         <span key={i} className="mr-2">
