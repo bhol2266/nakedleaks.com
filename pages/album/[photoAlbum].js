@@ -50,21 +50,51 @@ function Album({ data, relatedAlbums }) {
  
   return (
     <div className=" ">
-      <Head>
-        <title>{photoAlbum.replace(/-/g, " ")}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-        <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta property="og:title" content={photoAlbum.replace(/-/g, " ")} />
-        <meta property="og:description" content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-        <meta property="og:url" content={`https://www.Antarvasna.app/photo/${photoAlbum}`} />
-        <meta property="og:site_name" content="Free Hindi Sex Stories" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={photoAlbum.replace(/-/g, " ")} />
-        <meta name="twitter:description" content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
-        <meta name="twitter:label1" content="पोस्ट" />
-        <meta name="twitter:data1" content="85" />
-      </Head>
+    <Head>
+  <title>{data.title}</title>
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <meta name="description" content={`Explore ${data.title} with high-quality Indian nude and sex photos. Browse explicit photos, hot selfies, and adult galleries.`} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  {/* Open Graph */}
+  <meta property="og:title" content={`${data.title}`} />
+  <meta property="og:description" content={`Check out ${data.title}. High-quality Indian nude and sex photos including hot selfies and adult content.`} />
+  <meta property="og:url" content={`https://www.nakedleaks.com/${encodeURIComponent(photoAlbum)}`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content={data.imageArray[0] || "/images/og-default.jpg"} />
+  <meta property="og:image:alt" content={`${data.title} gallery preview`} />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${data.title}`} />
+  <meta name="twitter:description" content={`Explore ${data.title} with Indian nude photos, hot selfies, and adult galleries.`} />
+  <meta name="twitter:image" content={data.imageArray[0] || "/images/twitter-card.jpg"} />
+  <meta name="twitter:image:alt" content={`${data.title} gallery preview`} />
+
+  {/* JSON-LD Structured Data */}
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": data.title,
+        "description": `Explore ${data.title} with Indian nude and sex photos.`,
+        "url": `https://www.nakedleaks.com/${encodeURIComponent(photoAlbum)}`,
+        "thumbnailUrl": data.imageArray[0] || "/images/og-default.jpg",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Desi Scandals",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "/images/logo.png"
+          }
+        }
+      })
+    }}
+  />
+</Head>
+
 
 
       <div className="flex flex-col">
