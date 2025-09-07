@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import videosContext from '../context/videos/videosContext';
 
-function SinglePicThumnail({ picURL, index }) {
+function SinglePicThumnail({ picURL, index,href }) {
     const { showCarousel, setshowCarausel, CarouselIndex, setCarouselIndex } = useContext(videosContext);
     const [imageSrc, setImageSrc] = useState(picURL);
 
@@ -37,8 +37,11 @@ function SinglePicThumnail({ picURL, index }) {
     return (
         <div onClick={() => { setshowCarausel(true); setCarouselIndex(index) }} key={index} className="relative overflow-hidden">
             <img
-                src={imageSrc}
+                // src={imageSrc}
                 // src="/dummy_image.png"
+
+                src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${href}/${index}.jpg`}
+
 
                 alt={picURL}
                 onError={handleImageError} // Call this function if the image fails to load

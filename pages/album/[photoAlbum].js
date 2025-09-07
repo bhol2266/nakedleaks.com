@@ -105,7 +105,7 @@ function Album({ data, relatedAlbums }) {
         <div className="flex flex-wrap justify-center">
 
           {data.imageArray.map((img, index) => (
-            <SinglePicThumnail key={img} picURL={img} index={index} />
+            <SinglePicThumnail key={img} picURL={img} index={index} href={data.href} />
           ))}
 
         </div>
