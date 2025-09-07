@@ -43,7 +43,7 @@ function SinglePicThumnail({ picURL, index,href }) {
                 src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${href}/${index}.jpg`}
 
 
-                alt={picURL}
+                alt={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${href}/${index}.jpg`}
                 onError={handleImageError} // Call this function if the image fails to load
 
                 className="w-auto h-[200px] object-cover m-1 rounded transition-transform duration-300 ease-in-out transform hover:scale-105 "
