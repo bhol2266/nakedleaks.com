@@ -112,7 +112,7 @@ function Album({ data, relatedAlbums }) {
 
 
         <div >
-          <h2 className="m-1 text-xl shadow-lg bg-red-500 text-white font-poppins text-center mt-6 rounded">
+          <h2 className=" text-xl shadow-lg bg-red-500 text-white font-poppins text-center mt-6 rounded">
             Related Photos
           </h2>
 
