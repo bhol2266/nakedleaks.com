@@ -9,6 +9,7 @@ import categories_photo from '@/JsonData/photos/categories_list.json'
 import Link from "next/link";
 import videosContext from "../../context/videos/videosContext";
 import Carousel from "../../components/Carousel";
+import Posts from "@/components/Posts";
 
 
 function Album({ data, relatedAlbums }) {
@@ -27,7 +28,7 @@ function Album({ data, relatedAlbums }) {
   if (router.isFallback) {
     return (
       <div className="flex justify-center mx-auto mt-10 ">
-<BeatLoader loading size={25} color={"#DB2777"} />
+        <BeatLoader loading size={25} color={"#DB2777"} />
       </div>
     );
   }
@@ -87,9 +88,8 @@ function Album({ data, relatedAlbums }) {
           <h2 className="m-1 text-xl shadow-lg bg-red-500 text-white font-poppins text-center mt-6 rounded">
             Related Photos
           </h2>
-          <div className={` grid grid-cols-2 p-1 sm:grid-cols-1 gap-x-1  md:grid-cols-3 lg:grid-cols-4 space-x-2 space-y-4`}>
-            {relatedPics}
-          </div>
+
+          <Posts posts={relatedPics} />
         </div>
       </div>
 
