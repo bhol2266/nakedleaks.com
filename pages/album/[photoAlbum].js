@@ -47,10 +47,7 @@ function Album({ data, relatedAlbums }) {
 
 
 
-  const relatedPics = relatedAlbums.map((picData) => {
-    return <PicsThumbnail key={picData.title} data={picData} />;
-  });
-
+ 
   return (
     <div className=" ">
       <Head>
@@ -89,7 +86,7 @@ function Album({ data, relatedAlbums }) {
             Related Photos
           </h2>
 
-          <Posts posts={relatedPics} />
+          <Posts posts={relatedAlbums} />
         </div>
       </div>
 
