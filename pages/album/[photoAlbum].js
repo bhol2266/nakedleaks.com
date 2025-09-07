@@ -47,53 +47,53 @@ function Album({ data, relatedAlbums }) {
 
 
 
- 
+
   return (
     <div className=" ">
-    <Head>
-  <title>{data.title}</title>
-  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-  <meta name="description" content={`Explore ${data.title} with high-quality Indian nude and sex photos. Browse explicit photos, hot selfies, and adult galleries.`} />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <Head>
+        <title>{data.title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content={`Explore ${data.title} with high-quality Indian nude and sex photos. Browse explicit photos, hot selfies, and adult galleries.`} />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-  {/* Open Graph */}
-  <meta property="og:title" content={`${data.title}`} />
-  <meta property="og:description" content={`Check out ${data.title}. High-quality Indian nude and sex photos including hot selfies and adult content.`} />
-  <meta property="og:url" content={`https://www.nakedleaks.com/${encodeURIComponent(photoAlbum)}`} />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content={data.imageArray[0] || "/images/og-default.jpg"} />
-  <meta property="og:image:alt" content={`${data.title} gallery preview`} />
+        {/* Open Graph */}
+        <meta property="og:title" content={`${data.title}`} />
+        <meta property="og:description" content={`Check out ${data.title}. High-quality Indian nude and sex photos including hot selfies and adult content.`} />
+        <meta property="og:url" content={`https://www.nakedleaks.com/${encodeURIComponent(photoAlbum)}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={data.imageArray[0] || "/images/og-default.jpg"} />
+        <meta property="og:image:alt" content={`${data.title} gallery preview`} />
 
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={`${data.title}`} />
-  <meta name="twitter:description" content={`Explore ${data.title} with Indian nude photos, hot selfies, and adult galleries.`} />
-  <meta name="twitter:image" content={data.imageArray[0] || "/images/twitter-card.jpg"} />
-  <meta name="twitter:image:alt" content={`${data.title} gallery preview`} />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${data.title}`} />
+        <meta name="twitter:description" content={`Explore ${data.title} with Indian nude photos, hot selfies, and adult galleries.`} />
+        <meta name="twitter:image" content={data.imageArray[0] || "/images/twitter-card.jpg"} />
+        <meta name="twitter:image:alt" content={`${data.title} gallery preview`} />
 
-  {/* JSON-LD Structured Data */}
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ImageGallery",
-        "name": data.title,
-        "description": `Explore ${data.title} with Indian nude and sex photos.`,
-        "url": `https://www.nakedleaks.com/${encodeURIComponent(photoAlbum)}`,
-        "thumbnailUrl": data.imageArray[0] || "/images/og-default.jpg",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Desi Scandals",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "/images/logo.png"
-          }
-        }
-      })
-    }}
-  />
-</Head>
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ImageGallery",
+              "name": data.title,
+              "description": `Explore ${data.title} with Indian nude and sex photos.`,
+              "url": `https://www.nakedleaks.com/${encodeURIComponent(photoAlbum)}`,
+              "thumbnailUrl": data.imageArray[0] || "/images/og-default.jpg",
+              "publisher": {
+                "@type": "Organization",
+                "name": "Desi Scandals",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "/images/logo.png"
+                }
+              }
+            })
+          }}
+        />
+      </Head>
 
 
 
@@ -112,10 +112,9 @@ function Album({ data, relatedAlbums }) {
 
 
         <div >
-          <h2 className=" text-xl shadow-lg bg-red-500 text-white font-poppins text-center mt-6 rounded">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white py-3 rounded-lg shadow-lg mb-6">
             Related Photos
           </h2>
-
           <Posts posts={relatedAlbums} />
         </div>
       </div>
