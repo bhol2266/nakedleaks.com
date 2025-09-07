@@ -140,7 +140,7 @@ function PicsThumbnail({ data, imageIndex }) {
 
 
                         <div className="flex items-center text-[13px]">
-                            <img className='h-[20px] w-[20px] mr-3' src='./icons/chat.png' alt='' />
+                            <img className='h-[20px] w-[20px] mr-3' src='/icons/chat.png' alt='' />
                             <span className='text-[13px]'>Leave a comment</span>
                         </div>
 
