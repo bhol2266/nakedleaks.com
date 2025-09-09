@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     BACKEND_URL: 'https://backend.fuckvideo.live/nakedleaks/', 
-    // BACKEND_URL: 'http://localhost:4001/nakedleaks/', 
-    CLOUDFLARE_WORKER: 'https://my-worker.ukdevelopers007.workers.dev/desikahaniya/',  
+    BACKEND_URL: 'http://localhost:4001/nakedleaks/', 
+    // CLOUDFLARE_WORKER: 'https://my-worker.ukdevelopers007.workers.dev/desikahaniya/',  
     CLOUDFLARE_R2_AUDIOSTORY: 'https://pub-46cdeefeaf774247ab99232ab1ebaa66.r2.dev/Audio_sex_stories/',  
     FRONTEND_URL: 'https://www.Antarvasna.app/',
     // FRONTEND_URL: 'http://localhost:3000/', 

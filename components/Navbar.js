@@ -7,14 +7,17 @@ import { ChevronDownIcon, XIcon } from "@heroicons/react/outline";
 import { SearchIcon } from "lucide-react";
 import videosContext from "../context/videos/videosContext";
 import categories from "../JsonData/photos/categories_list.json";
+import index from '../utils/algolia';
 
 function Navbar() {
     const { MobileAppModalVisible, setMobileAppModalVisible } = useContext(videosContext);
     const { currentLocation, countryBlocked } = useContext(videosContext);
-    const [showSuggested, setshowSuggested] = useState(false)
 
 
-    const [searchKey, setSearchKey] = useState("");
+    const [showSuggested, setShowSuggested] = useState(false);
+    const [tags, setTags] = useState([]);
+    const [searchKey, setSearchKey] = useState('');
+
     const [location, setLocation] = useState(currentLocation);
     const router = useRouter();
 
@@ -24,15 +27,56 @@ function Navbar() {
         }
     }, [currentLocation]);
 
-    const goSearch = (e) => {
-        e.preventDefault();
-        // 🔍 Add search functionality here
+    // Fetch suggestions from Algolia
+    const getSuggestedTags = async (e) => {
+        const query = e.target.value;
+        setSearchKey(query);
+
+        if (!query) {
+            setTags([]);
+            setShowSuggested(false);
+            return;
+        }
+
+        try {
+            const results = await index.search(query, { hitsPerPage: 12});
+            setTags(results.hits); // store full hit objects
+            setShowSuggested(true);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    const getSuggestedTags = (e) => {
-        setSearchKey(e.target.value);
-        // 🔍 Add suggested tags logic here
+    // Navigate when clicking a suggestion
+    const goToTag = (obj) => {
+        setSearchKey(obj.title)
+        setShowSuggested(false)
+        router.push(`/album/${obj.objectID}`);
+
     };
+
+    // Handle search button click
+    const goSearch = (e) => {
+        e.preventDefault();
+
+        if (searchKey.trim() !== '' && tags.length > 0) {
+            // extract objectIDs from current hits
+            const objectIDs = tags.map(hit => hit.objectID);
+
+            // pass objectIDs as a query string array
+            router.push({
+                pathname: '/search',
+                query: {
+                    query: searchKey.trim(),
+                    ids: objectIDs.join(',')  // e.g., "id1,id2,id3"
+                }
+            });
+
+            setShowSuggested(false);
+        }
+    };
+
+
 
     return (
         <div>
@@ -100,10 +144,11 @@ function Navbar() {
                                 leaveTo="transform opacity-0 scale-95"
                             >
                                 <Disclosure.Panel className="sm:flex">
-                                    <div className={`flex flex-col relative p-1 w-full  transition ease-in-out delay-150 mt-2 `}>
 
 
-                                        <form className="flex w-full items-center " onSubmit={goSearch}>
+
+                                    <div className="flex flex-col relative p-1 w-full transition ease-in-out delay-150 mt-2">
+                                        <form className="flex w-full items-center" onSubmit={goSearch}>
                                             <div className="flex-grow mr-4">
                                                 <input
                                                     value={searchKey}
@@ -116,34 +161,30 @@ function Navbar() {
                                             <div className="w-[18%]">
                                                 <button
                                                     type="submit"
-                                                    className="w-full p-2 text-sm bg-gray-800 text-white cursor-pointer hover:bg-gray-700 rounded-[15px] hover:bg-button_hover"
+                                                    className="w-full p-2 text-sm bg-gray-800 text-white cursor-pointer hover:bg-gray-700 rounded-[15px]"
                                                 >
                                                     Search
                                                 </button>
                                             </div>
-
-
-
                                         </form>
-                                        {showSuggested &&
-                                            <div className='bg-semiblack max-h-[300px] mt-1.5 z-50  overflow-scroll scrollbar-hide'>
-                                                {tags.map(tag => {
-                                                    return (
-                                                        <div key={tag} onClick={() => {
-                                                            setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                                        }} className='flex items-center space-x-2 p-2  cursor-pointer hover:bg-gray-200 pl-4 hover:rounded-[15px] hover:text-semiblack text-white'>
-                                                            {/* <img src='/login/history.png' className='h-[20px]' /> */}
-                                                            <p className='text-[13px] fontinter  '>{tag}</p>
 
-                                                        </div>
-                                                    )
-                                                })}
+                                        {showSuggested && (
+                                            <div className="bg-semiblack max-h-[300px] mt-1.5 z-50 overflow-y-scroll ">
+                                                {tags.map(obj => (
+                                                    <div
+                                                        key={obj.objectID}
+                                                        onClick={() => goToTag(obj)}
+                                                        className="flex items-center space-x-2 p-2 cursor-pointer hover:bg-gray-200 pl-4 hover:rounded-[15px] hover:text-semiblack text-black"
+                                                    >
+                                                        <p className="text-[13px] fontinter truncate w-full">{obj.title}</p>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        }
-
-
-
+                                        )}
                                     </div>
+
+
+
                                 </Disclosure.Panel>
                             </Transition>
                         </>
@@ -235,18 +276,35 @@ function Navbar() {
                             />
                         )}
 
-                        <form onSubmit={goSearch}>
-                            <div className="flex items-center border border-gray-500 rounded-lg px-2">
-                                <SearchIcon className="text-gray-400 h-6" />
-                                <input
-                                    value={searchKey}
-                                    onChange={getSuggestedTags}
-                                    className="w-[300px] h-[35px] bg-transparent outline-none pl-2 text-white placeholder-gray-400"
-                                    type="text"
-                                    placeholder="Search"
-                                />
-                            </div>
-                        </form>
+                        <div className="relative w-[400px]">
+                            <form onSubmit={goSearch}>
+                                <div className="flex items-center border border-gray-500 rounded-lg px-2">
+                                    <SearchIcon className="text-gray-400 h-6" />
+                                    <input
+                                        value={searchKey}
+                                        onChange={getSuggestedTags}
+                                        className="w-full h-[35px] bg-transparent outline-none pl-2 text-white placeholder-gray-400"
+                                        type="text"
+                                        placeholder="Search"
+                                    />
+                                </div>
+                            </form>
+
+                            {/* Suggestions dropdown */}
+                            {showSuggested && (
+                                <div className="absolute top-full left-0 right-0  mt-1 bg-white rounded-md z-50 h-fit overflow-y-auto shadow-lg pb-2">
+                                    {tags.map(obj => (
+                                        <div
+                                            key={obj.objectID}
+                                            onClick={() => goToTag(obj)}
+                                            className="px-4 py-3 cursor-pointer hover:bg-gray-200 text-black truncate text-sm "
+                                        >
+                                            {obj.title}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Right Side: Navigation */}
