@@ -67,6 +67,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:locale" content="hi_IN" />
         <meta name="google-site-verification" content="S1PCTdQeakM3pn5FHSb69dH8Q4FaLwkQ9xWm4XF4ZZ4" />
         <meta name="6a97888e-site-verification" content="6a7cc8128293023c8e44e366450437f9" />
+<meta name="algolia-site-verification"  content="1A27F895C802E527" />
 
       </Head>
 

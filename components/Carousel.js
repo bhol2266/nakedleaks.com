@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { IoIosClose } from "react-icons/io";
 import videosContext from '../context/videos/videosContext';
