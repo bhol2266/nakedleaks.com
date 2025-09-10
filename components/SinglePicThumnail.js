@@ -38,9 +38,9 @@ function SinglePicThumnail({ picURL, index,href }) {
         <div onClick={() => { setshowCarausel(true); setCarouselIndex(index) }} key={index} className="relative overflow-hidden">
             <img
                 // src={imageSrc}
-                src="/dummy_image.png"
+                // src="/dummy_image.png"
 
-                // src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${href}/${index}.jpg`}
+                src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${href}/${index}.jpg`}
 
 
                 alt={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${href}/${index}.jpg`}
