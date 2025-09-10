@@ -7,6 +7,7 @@ import tags from "../JsonData/photos/tags_list.json";
 
 function PicsThumbnail({ data, imageIndex }) {
     const [showImage, setShowImage] = useState(true);
+    
 
     const href = data.href;
 
@@ -24,10 +25,7 @@ function PicsThumbnail({ data, imageIndex }) {
 
     function getCategoryLink(category_title) {
 
-
-
-        const categoryObj = categories.find(cat => cat.category_title === category_title);
-
+        const categoryObj = categories.find(cat => cat.category_title.toLowerCase() === category_title.toLowerCase());
         return `/category/${categoryObj?.href}`;
     }
 
@@ -78,15 +76,15 @@ function PicsThumbnail({ data, imageIndex }) {
                                 className="max-w-full h-[300px] bg-black object-contain "
                                 loading="lazy"
                                 alt={data.title}
-                                // src="/dummy_image.png"
-                                src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/thumbnail.jpg`}
+                                src="/dummy_image.png"
+                                // src={`https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/thumbnail.jpg`}
                                 onError={() => setShowImage(false)}
                             />
 
 
                         </div>
                     )}
-                </Link> 
+                </Link>
 
                 <div className='p-2'>
 

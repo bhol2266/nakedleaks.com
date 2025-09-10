@@ -83,6 +83,9 @@ export async function getStaticProps(context) {
 
     const page = "1"
 
+    console.log(`${process.env.BACKEND_URL}getPhotoAlbumsCategoriesPaginated_API?category=${categoryObj.category_title}&page=${page}`);
+    
+
     const res = await fetch(`${process.env.BACKEND_URL}getPhotoAlbumsCategoriesPaginated_API?category=${categoryObj.category_title}&page=${page}`);
 
     const data = await res.json();
