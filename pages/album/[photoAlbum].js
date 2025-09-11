@@ -15,6 +15,7 @@ import Posts from "@/components/Posts";
 function Album({ data, relatedAlbums }) {
 
 
+  const router = useRouter();
   const { showCarousel, setshowCarausel, CarouselIndex, setCarouselIndex, setImageUrls } = useContext(videosContext);
 
   useEffect(() => {
@@ -25,7 +26,6 @@ function Album({ data, relatedAlbums }) {
   }, [router.isReady, data, setImageUrls, setCarouselIndex]);
 
 
-  const router = useRouter();
   if (router.isFallback) {
     return (
       <div className="flex justify-center mx-auto mt-10 ">
@@ -154,16 +154,18 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { photoAlbum } = context.params;
 
-  const newHref = photoAlbum.replaceAll("+", "_").toLowerCase()
+  // Encode the href to handle special characters
+  const encodedHref = encodeURIComponent(photoAlbum);
 
-  const res = await fetch(`${process.env.BACKEND_URL}getSingleAlbum_API?href=${photoAlbum}`);
+  const res = await fetch(`${process.env.BACKEND_URL}getSingleAlbum_API?href=${encodedHref}`);
   const data = await res.json();
 
   return {
     props: {
       data: data.album,
-      relatedAlbums: data.similarAlbums
+      relatedAlbums: data.similarAlbums || [],
     },
   };
 }
+
 
