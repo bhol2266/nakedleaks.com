@@ -18,10 +18,11 @@ function Album({ data, relatedAlbums }) {
   const { showCarousel, setshowCarausel, CarouselIndex, setCarouselIndex, setImageUrls } = useContext(videosContext);
 
   useEffect(() => {
-    if (router.isReady) {
-      setImageUrls(data.imageArray)
+    if (router.isReady && data?.imageArray) {
+      setImageUrls(data.imageArray);   // Update context images
+      setCarouselIndex(0);             // Reset carousel to first image
     }
-  }, [])
+  }, [router.isReady, data, setImageUrls, setCarouselIndex]);
 
 
   const router = useRouter();
