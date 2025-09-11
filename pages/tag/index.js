@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import tags_list from "../../JsonData/photos/tags_list.json";
-
+import Head from "next/head";
 const Index = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedLetter, setSelectedLetter] = useState("ALL");
