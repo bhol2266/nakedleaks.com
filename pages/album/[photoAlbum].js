@@ -111,6 +111,8 @@ function Album({ data, relatedAlbums }) {
 
         </div>
 
+        <h2 className="p-2 text-sm lg text-md">{data.content}</h2>
+
 
         <div >
           <h2 className="mt-6 text-xl sm:text-2xl font-semibold text-center bg-black text-white py-2 rounded-lg shadow-lg mb-2">
