@@ -13,6 +13,7 @@ function Footer() {
   { href: '/report-content', label: 'Report Content' },
   { href: '/privacy-policy', label: 'Privacy Policy' },
   { href: '/18-u-s-c-2257', label: '2257 Statement' },
+  { href: 'https://theporndude.com/', label: 'ThePornDude' },
 ];
 
 
