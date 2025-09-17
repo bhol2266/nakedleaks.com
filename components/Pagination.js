@@ -43,20 +43,7 @@ const Pagination = ({ data }) => {
         </Link>
       </div>
 
-      {/* Photo Categories */}
-      {/* <p className="text-center mx-auto text-[18px] border-gray-400 rounded-md text-black font-semibold p-1 pl-4 pr-2 cursor-pointer bg-white opacity-75 mt-[30px]">
-        Photo Categories
-      </p>
-
-      <div className="md:hidden mx-[16px] mt-4">
-        {categories_photo.map((category) => (
-          <Link key={category.href} href={`/category/${category.href}`}>
-            <p className="font-inter text-left my-2 py-1.5 px-8 text-sm hover:bg-orange-200 rounded-md text-semiblack cursor-pointer underline">
-              {category.category_title}
-            </p>
-          </Link>
-        ))}
-      </div> */}
+     
 
       {/* Ads Section */}
       <div className="sm:flex items-center justify-center sm:w-1/2 lg:w-1/4 mx-auto mt-4">

@@ -245,8 +245,8 @@ function Navbar() {
                         <p className=' text-[15px] md:text-xl   text-center p-1 pr-6 hover:text-gray-300  text-white'>Tags</p>
                     </Link>
 
-                    <a href='https://theporndude.com/' >
-                        <p className=' text-[15px] md:text-xl   text-center p-1 pr-6 hover:text-gray-300 text-white cursor-pointer'>ThePornDude</p>
+                    <a href='/category/bhabhi-nude-pics' >
+                        <p className=' text-[15px] md:text-xl   text-center p-1 pr-6 hover:text-gray-300 text-white cursor-pointer'>🔥 Trending Pics</p>
                     </a>
 
                 </div>
@@ -370,17 +370,17 @@ function Navbar() {
                         </Link>
 
                         <a
-                            href="https://theporndude.com/"
+                            href="/category/bhabhi-nude-pics"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             <p
-                                className={`${router.asPath.includes("theporndude")
+                                className={`${router.asPath.includes("bhabhi-nude-pics")
                                     ? "text-white text-[21px] border-b-2 border-white"
                                     : "text-white text-[19px] hover:text-gray-300"
                                     } cursor-pointer`}
                             >
-                                ThePornDude
+                                🔥 Trending Pics
                             </p>
                         </a>
                     </div>
