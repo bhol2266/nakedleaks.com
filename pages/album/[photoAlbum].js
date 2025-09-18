@@ -9,12 +9,16 @@ import SinglePicThumnail from "../../components/SinglePicThumnail";
 import videosContext from "../../context/videos/videosContext";
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { useState } from "react";
+
 
 function Album({ data, relatedAlbums }) {
 
 
   const router = useRouter();
   const { setCarouselIndex, setImageUrls } = useContext(videosContext);
+  const [downloading, setDownloading] = useState(false); // ✅ state for spinner
+
 
   useEffect(() => {
     if (router.isReady && data?.imageArray) {
@@ -45,33 +49,22 @@ function Album({ data, relatedAlbums }) {
   }
 
   const handleDownloadAll = async () => {
+    setDownloading(true); // ✅ show spinner
 
-     return
     const zip = new JSZip();
     const folder = zip.folder(data.title || "images");
 
     const imageUrls = data.imageArray.map((_, index) => {
-      return `https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/${index}.jpg`;
+      const realUrl = `https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/${index}.jpg`;
+      return `/api/proxyImage?url=${encodeURIComponent(realUrl)}`;
     });
-
-
-    
 
     const fetchAndAddImage = async (url, index) => {
       try {
-        console.log(`Fetching image: ${url}`);
-        const response = await fetch(url, {
-          mode: 'cors',
-        });
-
-        if (!response.ok) {
-          console.error(`Fetch failed for ${url}: ${response.statusText}`);
-          return;
-        }
-
+        const response = await fetch(url);
+        if (!response.ok) return;
         const blob = await response.blob();
-        const extension = url.split('.').pop().split('?')[0]; // e.g., jpg, png
-        folder.file(`image_${index + 1}.${extension}`, blob);
+        folder.file(`image_${index + 1}.jpg`, blob);
       } catch (error) {
         console.error(`Error fetching image ${url}:`, error);
       }
@@ -80,7 +73,10 @@ function Album({ data, relatedAlbums }) {
     await Promise.all(imageUrls.map((url, index) => fetchAndAddImage(url, index)));
 
     zip.generateAsync({ type: "blob" }).then((content) => {
-      saveAs(content, `${data.title || 'album'}.zip`);
+      saveAs(content, `${data.title || "album"}.zip`);
+      setDownloading(false); // ✅ hide spinner
+    }).catch(() => {
+      setDownloading(false); // ✅ hide spinner if failed
     });
   };
 
@@ -154,9 +150,18 @@ function Album({ data, relatedAlbums }) {
         <div className="flex justify-center my-4">
           <button
             onClick={handleDownloadAll}
-            className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-6 rounded shadow"
+            disabled={downloading}
+            className={`bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-6 rounded shadow flex items-center gap-2 ${downloading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
           >
-            Download This Album
+            {downloading ? (
+              <>
+                <BeatLoader size={8} color="#fff" />
+                <span>Preparing Album...</span>
+              </>
+            ) : (
+              "Download This Album"
+            )}
           </button>
         </div>
 
