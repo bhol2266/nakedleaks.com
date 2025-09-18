@@ -1,22 +1,20 @@
+import Posts from "@/components/Posts";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 import Outstreams from "../../components/Ads/Outstream";
-import PicsThumbnail from "../../components/PicsThumbnail";
-import SinglePicThumnail from "../../components/SinglePicThumnail";
-import categories_photo from '@/JsonData/photos/categories_list.json'
-import Link from "next/link";
-import videosContext from "../../context/videos/videosContext";
 import Carousel from "../../components/Carousel";
-import Posts from "@/components/Posts";
-
+import SinglePicThumnail from "../../components/SinglePicThumnail";
+import videosContext from "../../context/videos/videosContext";
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 function Album({ data, relatedAlbums }) {
 
 
   const router = useRouter();
-  const {  setCarouselIndex, setImageUrls } = useContext(videosContext);
+  const { setCarouselIndex, setImageUrls } = useContext(videosContext);
 
   useEffect(() => {
     if (router.isReady && data?.imageArray) {
@@ -45,6 +43,46 @@ function Album({ data, relatedAlbums }) {
       title = photoAlbum.trim().replaceAll("-", " ");
     } catch (error) { }
   }
+
+  const handleDownloadAll = async () => {
+
+     return
+    const zip = new JSZip();
+    const folder = zip.folder(data.title || "images");
+
+    const imageUrls = data.imageArray.map((_, index) => {
+      return `https://pub-5fcdf72a54cd4edbb03ec3edaa415a42.r2.dev/nakedleaks/${data.href}/${index}.jpg`;
+    });
+
+
+    
+
+    const fetchAndAddImage = async (url, index) => {
+      try {
+        console.log(`Fetching image: ${url}`);
+        const response = await fetch(url, {
+          mode: 'cors',
+        });
+
+        if (!response.ok) {
+          console.error(`Fetch failed for ${url}: ${response.statusText}`);
+          return;
+        }
+
+        const blob = await response.blob();
+        const extension = url.split('.').pop().split('?')[0]; // e.g., jpg, png
+        folder.file(`image_${index + 1}.${extension}`, blob);
+      } catch (error) {
+        console.error(`Error fetching image ${url}:`, error);
+      }
+    };
+
+    await Promise.all(imageUrls.map((url, index) => fetchAndAddImage(url, index)));
+
+    zip.generateAsync({ type: "blob" }).then((content) => {
+      saveAs(content, `${data.title || 'album'}.zip`);
+    });
+  };
 
 
 
@@ -113,6 +151,14 @@ function Album({ data, relatedAlbums }) {
 
         <h2 className="p-2 text-sm lg text-md">{data.content}</h2>
 
+        <div className="flex justify-center my-4">
+          <button
+            onClick={handleDownloadAll}
+            className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-6 rounded shadow"
+          >
+            Download This Album
+          </button>
+        </div>
 
         <div >
           <h2 className="mt-6 text-xl sm:text-2xl font-semibold text-center bg-black text-white py-2 rounded-lg shadow-lg mb-2">
@@ -122,7 +168,7 @@ function Album({ data, relatedAlbums }) {
         </div>
       </div>
 
-   
+
 
       <Carousel />
       <Outstreams />

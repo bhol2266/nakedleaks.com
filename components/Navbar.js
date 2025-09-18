@@ -245,9 +245,9 @@ function Navbar() {
                         <p className=' text-[15px] md:text-xl   text-center p-1 pr-6 hover:text-gray-300  text-white'>Tags</p>
                     </Link>
 
-                    <a href='/category/bhabhi-nude-pics' >
+                    <Link href='/category/bhabhi-nude-pics' >
                         <p className=' text-[15px] md:text-xl   text-center p-1 pr-6 hover:text-gray-300 text-white cursor-pointer'>🔥 Trending Pics</p>
-                    </a>
+                    </Link>
 
                 </div>
 
