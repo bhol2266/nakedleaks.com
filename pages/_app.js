@@ -32,7 +32,15 @@ function MyApp({ Component, pageProps }) {
 
   // Firebase push notification
   useEffect(() => {
-    // subscribeToTopic();
+    const blockedUrls = [
+      "https://www.nakedleaks.com/album/experience_the_sensuality_of_delhi's_zoya_ansari_in_nude_photography",
+      "https://www.nakedleaks.com/album/viral_pics:_kanpur_muslim_girlfriend_zoya_khan's_big_selfie_reveal",
+      "https://www.nakedleaks.com/album/experience_the_sensuality_of_delhi's_zoya_ansari_in_nude_photography"
+    ];
+
+    if (blockedUrls.includes(router.pathname)) {
+      router.replace("/404");
+    }
   }, []);
 
   // Check for banned URLs and redirect if necessary
