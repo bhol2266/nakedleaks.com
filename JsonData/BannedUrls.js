@@ -23,6 +23,7 @@ export const BannedUrls = [
     "https://www.nakedleaks.com/album/viral_pics:_kanpur_muslim_girlfriend_zoya_khan's_big_selfie_reveal",
     "https://www.nakedleaks.com/album/experience_the_sensuality_of_delhi's_zoya_ansari_in_nude_photography",
     "http://localhost:3000/album/experience_the_sensuality_of_delhi's_zoya_ansari_in_nude_photography",
+    "https://www.nakedleaks.com/album/curvy_nri_woman_natasha_shukla's_intimate_selfies_with_recent_partner"
 
 ];
 
