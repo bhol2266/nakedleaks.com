@@ -10,9 +10,10 @@ import videosContext from "../../context/videos/videosContext";
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { useState } from "react";
+import { BannedHrefs } from "@/JsonData/BannedUrls";
 
 
-function Album({ data, relatedAlbums }) {
+function Album({ data, relatedAlbums, removed }) {
 
 
   const router = useRouter();
@@ -79,6 +80,28 @@ function Album({ data, relatedAlbums }) {
       setDownloading(false); // ✅ hide spinner if failed
     });
   };
+
+
+  if (removed) {
+    return (
+      <div className="min-h-[60vh] flex flex-col justify-center items-center text-center px-4">
+        <h1 className="text-2xl font-bold text-red-600 mb-3">
+          Content Removed
+        </h1>
+        <p className="text-gray-300 max-w-xl">
+          This album has been removed due to a copyright request or policy
+          violation.
+        </p>
+
+        <button
+          onClick={() => router.push("/")}
+          className="mt-5 bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded"
+        >
+          Go to Home
+        </button>
+      </div>
+    );
+  }
 
 
 
@@ -195,16 +218,32 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { photoAlbum } = context.params;
 
-  // Encode the href to handle special characters
-  const encodedHref = encodeURIComponent(photoAlbum);
+  // 🔴 Check banned hrefs
+  if (BannedHrefs.includes(photoAlbum)) {
+    return {
+      props: {
+        removed: true,
+      },
+      revalidate: 60, // optional
+    };
+  }
 
-  const res = await fetch(`${process.env.BACKEND_URL}getSingleAlbum_API?href=${encodedHref}`);
+  const encodedHref = encodeURIComponent(photoAlbum);
+  const res = await fetch(
+    `${process.env.BACKEND_URL}getSingleAlbum_API?href=${encodedHref}`
+  );
+
+  if (!res.ok) {
+    return { notFound: true };
+  }
+
   const data = await res.json();
 
   return {
     props: {
       data: data.album,
       relatedAlbums: data.similarAlbums || [],
+      removed: false,
     },
   };
 }
