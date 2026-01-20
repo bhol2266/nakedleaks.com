@@ -40,14 +40,14 @@ function MyApp({ Component, pageProps }) {
 
     const currentUrl = window.location.href;
 
-    if (BannedUrls.includes(window.location.href)) {
-      router.replace('/404');
-    }
+    // if (BannedUrls.includes(window.location.href)) {
+    //   router.replace('/404');
+    // }
 
-    const containsBannedKeywords = bannedKeywords.some(keyword => currentUrl.toLowerCase().includes(keyword.toLowerCase()));
-    if (containsBannedKeywords) {
-      router.push("/404")
-    }
+    // const containsBannedKeywords = bannedKeywords.some(keyword => currentUrl.toLowerCase().includes(keyword.toLowerCase()));
+    // if (containsBannedKeywords) {
+    //   router.push("/404")
+    // }
   }, [currentRoute]);
 
   return (
