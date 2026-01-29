@@ -36,6 +36,7 @@ export const BannedHrefs = [
     "curvy_nri_woman_natasha_shukla's_intimate_selfies_with_recent_partner",
     "viral_pics:_kanpur_muslim_girlfriend_zoya_khan's_big_selfie_revea",
     "experience_the_sensuality_of_delhi's_zoya_ansari_in_nude_photography",
+    "kanpur_sheetal_devar_intimate_photos_with_busty_features"
 
 ];
 
