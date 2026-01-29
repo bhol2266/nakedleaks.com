@@ -10,6 +10,7 @@ import videosContext from "../../context/videos/videosContext";
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { useState } from "react";
+import { BannedHrefs } from "@/JsonData/BannedUrls";
 
 
 function Album({ data, relatedAlbums }) {
@@ -195,18 +196,40 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { photoAlbum } = context.params;
 
-  // Encode the href to handle special characters
-  const encodedHref = encodeURIComponent(photoAlbum);
+  // 🔒 Redirect banned albums
+  if (BannedHrefs.includes(photoAlbum)) {
+    console.log("im here");
+    
+    return {
+      redirect: {
+        destination: "/content-removed",
+        permanent: false, // important
+      },
+    };
+  }
 
-  const res = await fetch(`${process.env.BACKEND_URL}getSingleAlbum_API?href=${encodedHref}`);
+  const encodedHref = encodeURIComponent(photoAlbum);
+  const res = await fetch(
+    `${process.env.BACKEND_URL}getSingleAlbum_API?href=${encodedHref}`
+  );
+
   const data = await res.json();
+
+  if (!data?.album) {
+    return {
+      redirect: {
+        destination: "/content-removed",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
       data: data.album,
       relatedAlbums: data.similarAlbums || [],
     },
+    revalidate: 60,
   };
 }
-
 
