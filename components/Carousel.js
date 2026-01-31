@@ -15,12 +15,14 @@ const Carousel = () => {
 
     const thumbnailsRef = useRef(null);
 
-    // Sync index
+
+
     useEffect(() => {
-        if (CarouselIndex >= 0 && CarouselIndex < imageUrls.length) {
-            setCurrentIndex(CarouselIndex);
-        }
-    }, [CarouselIndex, imageUrls.length]);
+        setCurrentIndex(0);
+        setImageData([]);          // Clear old images
+        setLoadingIndexes({});     // Reset loading state
+        setShowThumbnails(false);  // Hide thumbnails
+    }, [imageUrls]);
 
     // Fetch image base64
     const fetchImageData = async (url, index) => {

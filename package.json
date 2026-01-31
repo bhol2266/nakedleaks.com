@@ -1,6 +1,7 @@
 {
   "name": "nakedleaks.com",
   "version": "0.1.0",
+  "module": "",
   "private": true,
   "scripts": {
     "predeploy": "npm run build",
@@ -17,7 +18,7 @@
     "@headlessui/react": "^1.4.2",
     "algoliasearch": "^4.25.2",
     "axios": "^0.24.0",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.2.0",
     "cookies-next": "^6.1.0",
     "disqus-react": "^1.1.5",
     "downloadjs": "^1.4.7",
