@@ -120,8 +120,7 @@ const Carousel = () => {
                         <img
                             key={i}
                             src={`data:image/jpeg;base64,${img}`}
-                            className={`h-16 w-12 object-cover rounded cursor-pointer ${i === currentIndex ? "border-2 border-white scale-125" : ""
-                                }`}
+                            className={`h-16 w-12 object-cover rounded cursor-pointer ${i === currentIndex ? "border-2 border-white scale-125" : ""}`}
                             onClick={() => setCurrentIndex(i)}
                         />
                     ))}
